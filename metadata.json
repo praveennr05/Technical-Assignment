@@ -1,0 +1,6 @@
+{
+  "name": "Health AI Assignment Navigator & Workbench",
+  "description": "Interactive line-by-line structured document explorer, question planner, USN seed generator, and deliverable validator for the AI for Personal Health and Wellness technical assignment.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
