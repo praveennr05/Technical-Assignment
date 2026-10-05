@@ -28,7 +28,7 @@ const DEFAULT_ITEMS: GitChecklistItem[] = [
   {
     id: 'repo-created',
     category: 'repo_setup',
-    title: 'New GitHub repository created after assignment announcement',
+    title: 'New GitHub repository created after challenge release',
     description: 'Repository must be fresh (public, or shared with mnaveennk@iisc.ac.in). Old or repurposed repos are invalid.',
     ruleCitation: 'Page 4, Deliverable 1',
     severity: 'critical',

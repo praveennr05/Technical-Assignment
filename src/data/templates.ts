@@ -1,5 +1,5 @@
 export function generateReadme(seed: string, chosenQuestions: ('A' | 'B' | 'C' | 'D')[]): string {
-  return `# Health AI Technical Assignment: AI for Personal Health and Wellness
+  return `# Health AI Technical Suite: AI for Personal Health and Wellness
 
 **Candidate USN Seed:** \`${seed}\`  
 **Chosen Questions:** ${chosenQuestions.map(q => `Question ${q}`).join(' & ')}  
@@ -8,7 +8,7 @@ export function generateReadme(seed: string, chosenQuestions: ('A' | 'B' | 'C' |
 ---
 
 ## 1. Project Overview & Architecture
-This repository implements two comprehensive solutions to the B.E. (AI & ML) timed technical assignment.
+This repository implements two comprehensive solutions to the B.E. (AI & ML) timed technical evaluation.
 All models and train/test splits are strictly deterministic using seed **\`S = ${seed}\`**.
 
 \`\`\`
@@ -100,7 +100,7 @@ export function generatePersonalIntelligence(seed: string, chosenQuestions: ('A'
   return `# PERSONAL_INTELLIGENCE.md
 **Candidate Seed (Last 4 Digits of USN):** \`${seed}\`  
 **Assessment Date:** October 5-6, 2026  
-**Document Compliance:** Section 4 of Assignment Specification  
+**Document Compliance:** Section 4 of Technical Assessment Specification  
 
 ---
 

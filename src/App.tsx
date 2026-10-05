@@ -286,7 +286,7 @@ export default function App() {
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-bold text-white flex items-center space-x-2">
                   <Cpu className="w-5 h-5 text-indigo-400" />
-                  <span>The Four Assignment Building Blocks</span>
+                  <span>The Four Technical Building Blocks</span>
                 </h3>
                 <span className="text-xs text-slate-400">Click any block to enter its live lab</span>
               </div>
@@ -398,7 +398,7 @@ export default function App() {
             <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
               <h3 className="text-base font-bold text-white mb-3 flex items-center space-x-2">
                 <FileText className="w-4 h-4 text-indigo-400" />
-                <span>Executive Assignment Rules &amp; Evaluation Philosophy</span>
+                <span>Executive Evaluation Rules &amp; Assessment Philosophy</span>
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                 <div className="bg-slate-950 p-3.5 rounded-lg border border-slate-800">
@@ -759,14 +759,14 @@ export default function App() {
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800">
                   <span className="text-slate-400">Required Email Subject:</span>
                   <code className="text-indigo-300 font-mono font-bold">
-                    B.E. Assignment – {candidateName.trim() || '&lt;Full Name&gt;'} – {usn.trim() || '&lt;USN&gt;'}
+                    B.E. Evaluation – {candidateName.trim() || '&lt;Full Name&gt;'} – {usn.trim() || '&lt;USN&gt;'}
                   </code>
                 </div>
 
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800">
                   <span className="text-slate-400">Required Video Filename:</span>
                   <code className="text-amber-300 font-mono font-bold">
-                    {candidateName.replace(/\s+/g, '') || '&lt;FullName&gt;'}_Assignment_Demo.mp4
+                    {candidateName.replace(/\s+/g, '') || '&lt;FullName&gt;'}_Technical_Demo.mp4
                   </code>
                 </div>
 
@@ -789,16 +789,16 @@ export default function App() {
                     onClick={() => {
                       const emailBody = `Dear Examiner,
 
-Please find my submission for the B.E. (AI & ML) Technical Assignment on "AI for Personal Health and Wellness":
+Please find my submission for the B.E. (AI & ML) Technical Evaluation on "AI for Personal Health and Wellness":
 
 Candidate Name: ${candidateName}
 USN: ${usn}
 Personal Seed S: ${computedSeed}
 Selected Questions: ${chosenQuestions.map(q => `Question ${q}`).join(' & ')}
 
-1. GitHub Repository: https://github.com/candidate-username/health-ai-assignment
+1. GitHub Repository: https://github.com/candidate-username/health-ai-suite
 2. Demo Video (Google Drive): https://drive.google.com/file/d/your-demo-video-link/view?usp=sharing
-   (Filename: ${candidateName.replace(/\s+/g, '')}_Assignment_Demo.mp4, Shared as "Anyone with the link can view")
+   (Filename: ${candidateName.replace(/\s+/g, '')}_Technical_Demo.mp4, Shared as "Anyone with the link can view")
 
 Thank you,
 ${candidateName}
@@ -820,7 +820,7 @@ ${candidateName}
       {/* Footer */}
       <footer className="border-t border-slate-800 bg-slate-900/50 py-4 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
-          <div>Technical Assignment: AI for Personal Health and Wellness • Complete Suite</div>
+          <div>Technical Evaluation: AI for Personal Health and Wellness • Complete Suite</div>
           <div>Recipient: <span className="text-slate-400 font-mono">mnaveennk@iisc.ac.in</span> | Deadline: 6 Oct 2026, 5:00 PM IST</div>
         </div>
       </footer>

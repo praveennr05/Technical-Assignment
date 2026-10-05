@@ -18,7 +18,7 @@ export interface AssignmentSection {
 }
 
 export const ASSIGNMENT_METADATA = {
-  title: "Technical Assignment: AI for Personal Health and Wellness",
+  title: "Technical Assessment: AI for Personal Health and Wellness",
   date: "October 5, 2026",
   targetAudience: "All B.E. (AI & ML) candidates",
   deadline: "October 6, 2026, 5:00 PM IST",
@@ -31,7 +31,7 @@ export const SECTIONS_OVERVIEW: AssignmentSection[] = [
   {
     id: "header",
     number: "0",
-    title: "Assignment Header & Core Directive",
+    title: "Assessment Header & Core Directive",
     page: 1,
     summary: "Establishes candidate group, timed testing format, mandatory 2-of-4 selection, and strict automatic rejection on late delivery.",
     keyTakeaways: [
@@ -45,7 +45,7 @@ export const SECTIONS_OVERVIEW: AssignmentSection[] = [
     number: "1",
     title: "Why this topic",
     page: 1,
-    summary: "Rationale derived from screening 12 candidate resumes, mapping resume skill clusters to assignment modules.",
+    summary: "Rationale derived from screening 12 candidate resumes, mapping resume skill clusters to project modules.",
     keyTakeaways: [
       "Designed at the intersection of existing candidate skills and stretch challenges.",
       "Maps 7 resume skill clusters: Data cleaning/XGBoost, Classification metrics, Backend APIs/SQL, Dashboards, GenAI/RAG, Computer Vision, and Health platforms."
@@ -54,7 +54,7 @@ export const SECTIONS_OVERVIEW: AssignmentSection[] = [
   {
     id: "sec2",
     number: "2",
-    title: "How this assignment works & Ground Rules",
+    title: "How this evaluation works & Ground Rules",
     page: 2,
     summary: "Sets the health-tech startup scenario, strict deadline (Oct 6, 5:00 PM IST), 3-level evaluation model, USN seed formula S, and data privacy rule.",
     keyTakeaways: [
@@ -124,8 +124,8 @@ export const SECTIONS_OVERVIEW: AssignmentSection[] = [
     summary: "Submission inbox, exact email subject syntax, video MP4 naming format, plagiarism policy, and time management advice.",
     keyTakeaways: [
       "Submission Email: mnaveennk@iisc.ac.in",
-      "Email Subject: B.E. Assignment – <Full Name> – <USN>",
-      "Video Filename: <FullName>_Assignment_Demo.mp4",
+      "Email Subject: B.E. Evaluation – <Full Name> – <USN>",
+      "Video Filename: <FullName>_Technical_Demo.mp4",
       "Strict Plagiarism Rule: Identical code/results = immediate rejection for both parties.",
       "Advice: A complete answer to 2 questions is far better than partial attempts at 4. Commit early and often."
     ]
