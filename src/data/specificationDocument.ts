@@ -8,7 +8,7 @@ export interface DocumentLine {
   annotation?: string;
 }
 
-export interface AssignmentSection {
+export interface SpecSection {
   id: string;
   number: string;
   title: string;
@@ -17,7 +17,7 @@ export interface AssignmentSection {
   keyTakeaways: string[];
 }
 
-export const ASSIGNMENT_METADATA = {
+export const SPEC_METADATA = {
   title: "Technical Assessment: AI for Personal Health and Wellness",
   date: "October 5, 2026",
   targetAudience: "All B.E. (AI & ML) candidates",
@@ -27,7 +27,8 @@ export const ASSIGNMENT_METADATA = {
   seedRule: "S = Last 4 digits of your USN (random seed in every train/test split & model)",
 };
 
-export const SECTIONS_OVERVIEW: AssignmentSection[] = [
+
+export const SECTIONS_OVERVIEW: SpecSection[] = [
   {
     id: "header",
     number: "0",
@@ -134,13 +135,13 @@ export const SECTIONS_OVERVIEW: AssignmentSection[] = [
 
 export const RAW_DOCUMENT_LINES: DocumentLine[] = [
   // Page 1
-  { lineNum: 1, page: 1, section: "Header", category: "metadata", importance: "normal", text: "Technical Assignment: AI for Personal Health and Wellness", annotation: "Document header / title" },
-  { lineNum: 2, page: 1, section: "Header", category: "metadata", importance: "high", text: "Oct 5, 2026", annotation: "Assignment issue date" },
-  { lineNum: 3, page: 1, section: "Header", category: "rule", importance: "critical", text: "All B.E. (AI & ML) candidates will complete one common, timed assignment: answer two of four multi-level questions on building practical AI tools for personal health.", annotation: "Target cohort and mandate: 2 of 4 questions" },
+  { lineNum: 1, page: 1, section: "Header", category: "metadata", importance: "normal", text: "Technical Assessment: AI for Personal Health and Wellness", annotation: "Document header / title" },
+  { lineNum: 2, page: 1, section: "Header", category: "metadata", importance: "high", text: "Oct 5, 2026", annotation: "Assessment issue date" },
+  { lineNum: 3, page: 1, section: "Header", category: "rule", importance: "critical", text: "All B.E. (AI & ML) candidates will complete one common, timed assessment: answer two of four multi-level questions on building practical AI tools for personal health.", annotation: "Target cohort and mandate: 2 of 4 questions" },
   { lineNum: 4, page: 1, section: "Header", category: "rule", importance: "critical", text: "Submissions received after the window closes are rejected automatically.", annotation: "Strict hard deadline cutoff" },
   { lineNum: 5, page: 1, section: "1. Why this topic", category: "context", importance: "normal", text: "1. Why this topic", annotation: "Section 1 heading" },
   { lineNum: 6, page: 1, section: "1. Why this topic", category: "context", importance: "normal", text: "The topic was chosen after screening all twelve candidate resumes. It sits where the most common skills overlap, so every candidate can start from something they already know and still has to stretch.", annotation: "Design rationale across 12 candidate resumes" },
-  { lineNum: 7, page: 1, section: "1. Why this topic", category: "context", importance: "normal", text: "Skill cluster seen across resumes | How it appears in this assignment", annotation: "Mapping table header" },
+  { lineNum: 7, page: 1, section: "1. Why this topic", category: "context", importance: "normal", text: "Skill cluster seen across resumes | How it appears in this technical evaluation", annotation: "Mapping table header" },
   { lineNum: 8, page: 1, section: "1. Why this topic", category: "context", importance: "normal", text: "Python, Pandas, NumPy, scikit-learn, XGBoost -> Cleaning health data and training prediction models", annotation: "Data cleaning & model training mapping" },
   { lineNum: 9, page: 1, section: "1. Why this topic", category: "context", importance: "normal", text: "ML classification (churn, heart failure, resume screening) -> Predicting a health risk and judging the model honestly", annotation: "Classification & honest evaluation mapping" },
   { lineNum: 10, page: 1, section: "1. Why this topic", category: "context", importance: "normal", text: "Backend APIs (FastAPI, Flask, Django) and databases (MySQL, PostgreSQL, SQLite) -> Serving a model through an API and saving results", annotation: "API serving & persistence mapping" },
@@ -148,18 +149,18 @@ export const RAW_DOCUMENT_LINES: DocumentLine[] = [
   { lineNum: 12, page: 1, section: "1. Why this topic", category: "context", importance: "normal", text: "Generative AI (LLMs, prompt engineering, RAG, vector databases) -> A health-information assistant that answers from trusted sources", annotation: "GenAI & trusted RAG mapping" },
   { lineNum: 13, page: 1, section: "1. Why this topic", category: "context", importance: "normal", text: "Computer vision (OpenCV, MediaPipe, YOLO, CNNs) -> Tracking body movement from a camera", annotation: "CV & pose movement mapping" },
   { lineNum: 14, page: 1, section: "1. Why this topic", category: "context", importance: "normal", text: "Health-related projects (heart failure, health platforms, crop disease) -> Personal health and wellness as the shared domain", annotation: "Domain grounding" },
-  { lineNum: 15, page: 1, section: "2. How this assignment works", category: "context", importance: "normal", text: "2. How this assignment works", annotation: "Section 2 heading" },
-  { lineNum: 16, page: 1, section: "2. How this assignment works", category: "context", importance: "normal", text: "Scenario. A small health-tech team needs four building blocks: a risk predictor, an app that uses it, a trusted question-answering assistant, and an exercise tracker. Each question below is one of these blocks.", annotation: "Health-tech team startup scenario definition" },
+  { lineNum: 15, page: 1, section: "2. How this assessment works", category: "context", importance: "normal", text: "2. How this assessment works", annotation: "Section 2 heading" },
+  { lineNum: 16, page: 1, section: "2. How this assessment works", category: "context", importance: "normal", text: "Scenario. A small health-tech team needs four building blocks: a risk predictor, an app that uses it, a trusted question-answering assistant, and an exercise tracker. Each question below is one of these blocks.", annotation: "Health-tech team startup scenario definition" },
   
   // Page 2
-  { lineNum: 17, page: 2, section: "2. How this assignment works", category: "rule", importance: "critical", text: "Timing. The clock starts at the timestamp of the group post. Nothing is accepted after 5:00 PM IST on 6 October 2026. There are no extensions.", annotation: "Exact deadline: 5:00 PM IST, 6 Oct 2026" },
-  { lineNum: 18, page: 2, section: "2. How this assignment works", category: "rule", importance: "critical", text: "The rule. There are four questions. Answer any two. Each question has three levels, and a question counts only if all three levels are attempted.", annotation: "Mandatory: Answer any 2; all 3 levels must be attempted" },
-  { lineNum: 19, page: 2, section: "2. How this assignment works", category: "rule", importance: "high", text: "Level 1: Build | What it tests: Can you get a working result? | Rules: Any library allowed", annotation: "Level 1 criteria (libraries permitted)" },
-  { lineNum: 20, page: 2, section: "2. How this assignment works", category: "rule", importance: "critical", text: "Level 2: Code it yourself | What it tests: Do you understand how it works inside? | Rules: Write the named part from scratch; the named libraries are not allowed for that part", annotation: "Level 2 criteria: Scratch implementation requirement" },
-  { lineNum: 21, page: 2, section: "2. How this assignment works", category: "rule", importance: "critical", text: "Level 3: Reason with your results | What it tests: Can you think about what your own system did? | Rules: Predict first, then test, then explain using your own numbers", annotation: "Level 3 criteria: Predict-before-run mandate" },
-  { lineNum: 22, page: 2, section: "2. How this assignment works", category: "rule", importance: "critical", text: "Your personal seed. Let S be the last four digits of your USN. Use S as the random seed in every train/test split and every model. Your numbers will therefore differ from everyone else's. Identical results in two submissions will lead to both being rejected.", annotation: "Formula for S: Last 4 digits of USN. Anti-copy mechanism" },
-  { lineNum: 23, page: 2, section: "2. How this assignment works", category: "rule", importance: "high", text: "Data. Use only public datasets, public documents or your own recordings. Do not use anyone's personal health records.", annotation: "Data privacy & ethics boundary" },
-  { lineNum: 24, page: 2, section: "2. How this assignment works", category: "rule", importance: "normal", text: "Suggested time plan. About 1 hour 45 minutes per question, and 30 minutes for the video and submission.", annotation: "Recommended pacing (~4 hours total)" },
+  { lineNum: 17, page: 2, section: "2. How this assessment works", category: "rule", importance: "critical", text: "Timing. The clock starts at the timestamp of the group post. Nothing is accepted after 5:00 PM IST on 6 October 2026. There are no extensions.", annotation: "Exact deadline: 5:00 PM IST, 6 Oct 2026" },
+  { lineNum: 18, page: 2, section: "2. How this assessment works", category: "rule", importance: "critical", text: "The rule. There are four questions. Answer any two. Each question has three levels, and a question counts only if all three levels are attempted.", annotation: "Mandatory: Answer any 2; all 3 levels must be attempted" },
+  { lineNum: 19, page: 2, section: "2. How this assessment works", category: "rule", importance: "high", text: "Level 1: Build | What it tests: Can you get a working result? | Rules: Any library allowed", annotation: "Level 1 criteria (libraries permitted)" },
+  { lineNum: 20, page: 2, section: "2. How this assessment works", category: "rule", importance: "critical", text: "Level 2: Code it yourself | What it tests: Do you understand how it works inside? | Rules: Write the named part from scratch; the named libraries are not allowed for that part", annotation: "Level 2 criteria: Scratch implementation requirement" },
+  { lineNum: 21, page: 2, section: "2. How this assessment works", category: "rule", importance: "critical", text: "Level 3: Reason with your results | What it tests: Can you think about what your own system did? | Rules: Predict first, then test, then explain using your own numbers", annotation: "Level 3 criteria: Predict-before-run mandate" },
+  { lineNum: 22, page: 2, section: "2. How this assessment works", category: "rule", importance: "critical", text: "Your personal seed. Let S be the last four digits of your USN. Use S as the random seed in every train/test split and every model. Your numbers will therefore differ from everyone else's. Identical results in two submissions will lead to both being rejected.", annotation: "Formula for S: Last 4 digits of USN. Anti-copy mechanism" },
+  { lineNum: 23, page: 2, section: "2. How this assessment works", category: "rule", importance: "high", text: "Data. Use only public datasets, public documents or your own recordings. Do not use anyone's personal health records.", annotation: "Data privacy & ethics boundary" },
+  { lineNum: 24, page: 2, section: "2. How this assessment works", category: "rule", importance: "normal", text: "Suggested time plan. About 1 hour 45 minutes per question, and 30 minutes for the video and submission.", annotation: "Recommended pacing (~4 hours total)" },
   { lineNum: 25, page: 2, section: "3. The four questions", category: "question", importance: "high", text: "3. The four questions (answer any two)", annotation: "Section 3 heading" },
   { lineNum: 26, page: 2, section: "Question A", category: "question", importance: "high", text: "Question A: Predict a health risk", annotation: "Question A title: ML classification & risk estimation" },
   { lineNum: 27, page: 2, section: "Question A", category: "question", importance: "high", text: "• Level 1 – Build. Using UCI Heart Disease, Heart Failure Clinical Records or Pima Indians Diabetes, clean the data and train Logistic Regression and Random Forest (split with seed S). Report accuracy, precision and recall for both.", annotation: "Q-A Level 1: Public dataset + LR & RF + Seed S split + Metrics" },
@@ -190,7 +191,7 @@ export const RAW_DOCUMENT_LINES: DocumentLine[] = [
   { lineNum: 48, page: 4, section: "4. Personal intelligence and AI use", category: "integrity", importance: "critical", text: "Copy-pasted AI output with no reasoning of your own will be treated as incomplete, even if the code runs.", annotation: "Strict penalty on thoughtless copying" },
   { lineNum: 49, page: 4, section: "5. Deliverables", category: "deliverable", importance: "critical", text: "5. Deliverables", annotation: "Section 5 heading" },
   { lineNum: 50, page: 4, section: "5. Deliverables", category: "deliverable", importance: "critical", text: "Submit all three items within the window. A missing item means the submission will not be evaluated.", annotation: "All 3 items are mandatory; missing any one invalidates evaluation" },
-  { lineNum: 51, page: 4, section: "5. Deliverables", category: "deliverable", importance: "high", text: "Source code and files | Format: A new GitHub repository created after the assignment is posted (public, or shared with the reviewer)", annotation: "Repo creation requirement" },
+  { lineNum: 51, page: 4, section: "5. Deliverables", category: "deliverable", importance: "high", text: "Source code and files | Format: A new GitHub repository created after the prompt is posted (public, or shared with the reviewer)", annotation: "Repo creation requirement" },
   { lineNum: 52, page: 4, section: "5. Deliverables", category: "deliverable", importance: "critical", text: "Source code and files | What it must contain: One folder per question with Levels 1 to 3, and a README stating your seed S and the run steps. At least four commits spread across the window. A single upload at the end will be flagged.", annotation: "Repo structure & Git commit history rule: >=4 commits across time" },
   { lineNum: 53, page: 4, section: "5. Deliverables", category: "deliverable", importance: "high", text: "Demo video | Format: Screen recording, 3 to 5 minutes, uploaded to Google Drive. Set sharing to 'Anyone with the link can view'", annotation: "Video format: 3-5 min, Google Drive public link" },
   { lineNum: 54, page: 4, section: "5. Deliverables", category: "deliverable", importance: "critical", text: "Demo video | What it must contain: Your two questions shown running, with your own numbers explained in your own voice; focus on Levels 2 and 3", annotation: "Video content: Candidate's own voice, demonstrating live code & specific numbers" },
@@ -202,15 +203,15 @@ export const RAW_DOCUMENT_LINES: DocumentLine[] = [
   { lineNum: 58, page: 5, section: "6. How answers will be judged", category: "grading", importance: "high", text: "6. How answers will be judged", annotation: "Section 6 heading" },
   { lineNum: 59, page: 5, section: "6. How answers will be judged", category: "grading", importance: "critical", text: "• Depth: Levels 2 and 3 carry more weight than Level 1. A working Level 1 alone is not enough.", annotation: "Grading weight: Scratch code and reasoning outweigh basic library usage" },
   { lineNum: 60, page: 5, section: "6. How answers will be judged", category: "grading", importance: "high", text: "• Correctness: the code runs and gives sensible results.", annotation: "Code execution requirement" },
-  { lineNum: 61, page: 5, section: "6. How answers will be judged", category: "grading", importance: "critical", text: "• Reasoning: predictions, explanations and decisions are backed by your own numbers.", annotation: "Quantitative backing from seed S" },
+  { lineNum: 61, page: 6, section: "6. How answers will be judged", category: "grading", importance: "critical", text: "• Reasoning: predictions, explanations and decisions are backed by your own numbers.", annotation: "Quantitative backing from seed S" },
   { lineNum: 62, page: 5, section: "6. How answers will be judged", category: "grading", importance: "high", text: "• Personal intelligence: your own thinking is visible, and AI use is declared honestly.", annotation: "Integrity and transparency" },
   { lineNum: 63, page: 5, section: "6. How answers will be judged", category: "grading", importance: "high", text: "• Clarity: the demo video is clear and easy to follow.", annotation: "Communication quality" },
   { lineNum: 64, page: 5, section: "6. How answers will be judged", category: "grading", importance: "critical", text: "The live walkthrough can change the assessment if the work cannot be explained.", annotation: "Overriding clause: Ability to explain your code live" },
   { lineNum: 65, page: 5, section: "7. Submission and rules", category: "submission", importance: "critical", text: "7. Submission and rules", annotation: "Section 7 heading" },
   { lineNum: 66, page: 5, section: "7. Submission and rules", category: "submission", importance: "critical", text: "The window closes at 5:00 PM IST on 6 October 2026, whichever comes first. Any submission received after that is rejected automatically, with no exceptions. The time on your email is the time of submission. Commits made after the window closes will be ignored.", annotation: "Strict deadline & cutoff rules" },
   { lineNum: 67, page: 5, section: "7. Submission and rules", category: "submission", importance: "critical", text: "Submit to: mnaveennk@iisc.ac.in. Include the GitHub link and the Google Drive link to your demo video.", annotation: "Target submission email address" },
-  { lineNum: 68, page: 5, section: "7. Submission and rules", category: "submission", importance: "critical", text: "Email subject: B.E. Assignment – <Full Name> – <USN>", annotation: "Exact required email subject pattern" },
-  { lineNum: 69, page: 5, section: "7. Submission and rules", category: "submission", importance: "critical", text: "File name: <FullName>_Assignment_Demo.mp4", annotation: "Exact required demo video filename" },
+  { lineNum: 68, page: 5, section: "7. Submission and rules", category: "submission", importance: "critical", text: "Email subject: B.E. Submission – <Full Name> – <USN>", annotation: "Required email subject pattern" },
+  { lineNum: 69, page: 5, section: "7. Submission and rules", category: "submission", importance: "critical", text: "File name: <FullName>_Technical_Demo.mp4", annotation: "Required demo video filename" },
   { lineNum: 70, page: 5, section: "7. Submission and rules", category: "submission", importance: "critical", text: "Individual work only. Sharing code, data or answers is not allowed. If two candidates submit identical results, both submissions will be rejected.", annotation: "Zero tolerance for collusion / duplicate results" },
   { lineNum: 71, page: 5, section: "7. Submission and rules", category: "submission", importance: "high", text: "Credit your sources. Name every dataset, document, library and code snippet you reused.", annotation: "Academic attribution requirement" },
   { lineNum: 72, page: 5, section: "7. Submission and rules", category: "submission", importance: "normal", text: "Questions: email the same address within the first 30 minutes of the window.", annotation: "Clarification request window (first 30 min)" },

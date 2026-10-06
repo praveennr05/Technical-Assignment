@@ -183,18 +183,18 @@ export const GitChecklist: React.FC<Props> = ({ candidateSeed }) => {
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-800/80">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center border border-indigo-500/30">
+          <div className="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center border border-cyan-500/20">
             <GitBranch className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <h3 className="text-base font-bold text-white tracking-tight">
+              <h3 className="text-base font-semibold text-white tracking-tight">
                 Git Requirements &amp; Commit History Compliance Tracker
               </h3>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                Seed: S = {candidateSeed}
+              <span className="text-xs font-mono text-cyan-400">
+                · Seed S: {candidateSeed}
               </span>
             </div>
             <p className="text-xs text-slate-400">
@@ -207,13 +207,13 @@ export const GitChecklist: React.FC<Props> = ({ candidateSeed }) => {
         <div className="flex items-center space-x-2 text-xs">
           <button
             onClick={() => markAll(true)}
-            className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+            className="px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
           >
             Check All
           </button>
           <button
             onClick={() => markAll(false)}
-            className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors flex items-center space-x-1"
+            className="px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors flex items-center space-x-1"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset</span>
@@ -222,24 +222,24 @@ export const GitChecklist: React.FC<Props> = ({ candidateSeed }) => {
       </div>
 
       {/* Progress & Compliance Readout */}
-      <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center bg-slate-950 p-4 rounded-xl border border-slate-800">
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center bg-slate-950/80 p-4 rounded-xl border border-slate-800/80">
         <div className="sm:col-span-8 space-y-2">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-semibold text-slate-300 flex items-center space-x-2">
+            <span className="font-medium text-slate-300 flex items-center space-x-2">
               <span>Overall Git &amp; Deliverables Readiness</span>
-              <span className="font-mono text-indigo-400">({completedCount} / {totalCount} requirements checked)</span>
+              <span className="font-mono text-cyan-400">({completedCount} / {totalCount} requirements checked)</span>
             </span>
-            <span className="font-mono font-bold text-white text-sm">{progressPercent}%</span>
+            <span className="font-mono font-bold text-white text-sm tabular-nums">{progressPercent}%</span>
           </div>
 
           {/* Progress Bar */}
-          <div className="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
+          <div className="w-full bg-slate-800/80 rounded-full h-2 overflow-hidden">
             <div
               className={`h-full transition-all duration-500 rounded-full ${
                 progressPercent === 100
                   ? 'bg-emerald-500'
                   : progressPercent >= 60
-                  ? 'bg-indigo-500'
+                  ? 'bg-cyan-500'
                   : 'bg-amber-500'
               }`}
               style={{ width: `${progressPercent}%` }}
@@ -247,61 +247,60 @@ export const GitChecklist: React.FC<Props> = ({ candidateSeed }) => {
           </div>
         </div>
 
-        {/* Status Badge */}
+        {/* Status indicator */}
         <div className="sm:col-span-4 flex justify-end">
           {progressPercent === 100 ? (
-            <div className="bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 px-3.5 py-2 rounded-xl text-xs flex items-center space-x-2 font-bold shadow-sm">
+            <div className="text-emerald-300 text-xs flex items-center space-x-2 font-semibold">
               <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
               <span>100% Submission Ready</span>
             </div>
           ) : !allCriticalDone ? (
-            <div className="bg-rose-950/40 border border-rose-500/40 text-rose-300 px-3 py-2 rounded-xl text-xs flex items-center space-x-2 font-semibold">
+            <div className="text-rose-300 text-xs flex items-center space-x-2 font-medium">
               <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
               <div>
-                <span className="block font-bold">Critical Items Pending</span>
-                <span className="text-[10px] text-rose-400/80">{criticalItems.length - criticalCompleted} critical rules unverified</span>
+                <span className="block font-semibold">Critical Items Pending</span>
+                <span className="text-[11px] text-rose-400/80">{criticalItems.length - criticalCompleted} critical rules unverified</span>
               </div>
             </div>
           ) : (
-            <div className="bg-indigo-950/40 border border-indigo-500/40 text-indigo-300 px-3 py-2 rounded-xl text-xs flex items-center space-x-2 font-semibold">
-              <Sparkles className="w-4 h-4 text-indigo-400 shrink-0" />
-              <span>In Progress ({totalCount - completedCount} pending)</span>
+            <div className="text-cyan-300 text-xs flex items-center space-x-2 font-medium">
+              <Sparkles className="w-4 h-4 text-cyan-400 shrink-0" />
+              <span>In Progress · {totalCount - completedCount} pending</span>
             </div>
           )}
         </div>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center space-x-2 text-xs border-b border-slate-800 pb-3">
-        <span className="text-slate-500 text-[11px] uppercase tracking-wider font-semibold mr-2">Filter:</span>
+      <div className="flex items-center space-x-1.5 p-1 bg-slate-950/80 rounded-lg border border-slate-800/80 text-xs">
         <button
           onClick={() => setActiveFilter('all')}
-          className={`px-3 py-1 rounded-lg font-medium transition-colors ${
-            activeFilter === 'all' ? 'bg-indigo-600 text-white' : 'bg-slate-950 text-slate-400 hover:text-slate-200'
+          className={`px-3 py-1.5 rounded-md font-medium transition-colors ${
+            activeFilter === 'all' ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           All ({DEFAULT_ITEMS.length})
         </button>
         <button
           onClick={() => setActiveFilter('pending')}
-          className={`px-3 py-1 rounded-lg font-medium transition-colors ${
-            activeFilter === 'pending' ? 'bg-indigo-600 text-white' : 'bg-slate-950 text-slate-400 hover:text-slate-200'
+          className={`px-3 py-1.5 rounded-md font-medium transition-colors ${
+            activeFilter === 'pending' ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           Pending ({totalCount - completedCount})
         </button>
         <button
           onClick={() => setActiveFilter('completed')}
-          className={`px-3 py-1 rounded-lg font-medium transition-colors ${
-            activeFilter === 'completed' ? 'bg-indigo-600 text-white' : 'bg-slate-950 text-slate-400 hover:text-slate-200'
+          className={`px-3 py-1.5 rounded-md font-medium transition-colors ${
+            activeFilter === 'completed' ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           Completed ({completedCount})
         </button>
         <button
           onClick={() => setActiveFilter('critical')}
-          className={`px-3 py-1 rounded-lg font-medium transition-colors ${
-            activeFilter === 'critical' ? 'bg-rose-600 text-white' : 'bg-slate-950 text-slate-400 hover:text-slate-200'
+          className={`px-3 py-1.5 rounded-md font-medium transition-colors ${
+            activeFilter === 'critical' ? 'bg-rose-900/60 text-rose-200 shadow-sm' : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           Critical ({criticalItems.length})
@@ -309,19 +308,19 @@ export const GitChecklist: React.FC<Props> = ({ candidateSeed }) => {
       </div>
 
       {/* Checklist Items */}
-      <div className="space-y-3">
+      <div className="space-y-2.5">
         {filteredItems.map(item => {
           const isDone = !!completedIds[item.id];
           return (
             <div
               key={item.id}
               onClick={() => toggleItem(item.id)}
-              className={`p-4 rounded-xl border transition-all cursor-pointer flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${
+              className={`p-3.5 rounded-xl border transition-all cursor-pointer flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${
                 isDone
-                  ? 'bg-slate-950/70 border-slate-800/80 opacity-90'
+                  ? 'bg-slate-950/50 border-slate-850 opacity-80'
                   : item.severity === 'critical'
-                  ? 'bg-slate-950 border-rose-900/40 hover:border-rose-700/60'
-                  : 'bg-slate-950 border-slate-800 hover:border-slate-700'
+                  ? 'bg-slate-950/90 border-rose-900/30 hover:border-rose-700/50'
+                  : 'bg-slate-950/90 border-slate-800/80 hover:border-slate-700'
               }`}
             >
               <div className="flex items-start space-x-3 flex-1 min-w-0">
@@ -331,7 +330,7 @@ export const GitChecklist: React.FC<Props> = ({ candidateSeed }) => {
                     e.stopPropagation();
                     toggleItem(item.id);
                   }}
-                  className="mt-0.5 text-indigo-400 hover:text-indigo-300 transition-colors shrink-0"
+                  className="mt-0.5 text-slate-500 hover:text-slate-300 transition-colors shrink-0"
                 >
                   {isDone ? (
                     <CheckCircle2 className="w-5 h-5 text-emerald-400" />
@@ -341,17 +340,17 @@ export const GitChecklist: React.FC<Props> = ({ candidateSeed }) => {
                 </button>
 
                 <div className="space-y-1">
-                  <div className="flex items-center space-x-2 flex-wrap gap-1">
-                    <span className={`text-xs font-bold ${isDone ? 'line-through text-slate-400' : 'text-white'}`}>
+                  <div className="flex items-center space-x-2 flex-wrap gap-y-1 text-xs">
+                    <span className={`font-semibold ${isDone ? 'line-through text-slate-400' : 'text-white'}`}>
                       {item.title}
                     </span>
                     {item.severity === 'critical' && (
-                      <span className="text-[10px] px-1.5 py-0.2 rounded font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
-                        CRITICAL
+                      <span className="text-[11px] font-medium text-rose-400">
+                        · Critical Rule
                       </span>
                     )}
-                    <span className="text-[10px] font-mono text-slate-500">
-                      [{item.ruleCitation}]
+                    <span className="text-[11px] font-mono text-slate-500">
+                      · {item.ruleCitation}
                     </span>
                   </div>
                   <p className="text-xs text-slate-400 leading-relaxed font-sans">
@@ -364,9 +363,9 @@ export const GitChecklist: React.FC<Props> = ({ candidateSeed }) => {
               {item.suggestedCommand && (
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="shrink-0 w-full sm:w-auto flex items-center justify-between sm:justify-end space-x-2 bg-slate-900 p-2 rounded-lg border border-slate-800 text-[11px] font-mono text-slate-300"
+                  className="shrink-0 w-full sm:w-auto flex items-center justify-between sm:justify-end space-x-2 bg-slate-900/90 px-2.5 py-1.5 rounded-lg border border-slate-800 text-[11px] font-mono text-slate-300"
                 >
-                  <code className="text-indigo-300 line-clamp-1 max-w-[240px]">{item.suggestedCommand}</code>
+                  <code className="text-cyan-300 line-clamp-1 max-w-[240px]">{item.suggestedCommand}</code>
                   <button
                     onClick={() => copyCommand(item.suggestedCommand!, item.id)}
                     className="p-1 rounded hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"

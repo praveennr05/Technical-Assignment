@@ -1,4 +1,4 @@
-import { HealthRecord, ModelMetrics, ScratchFeatureWeight, ThresholdStep } from '../types/assignment';
+import { HealthRecord, ModelMetrics, ScratchFeatureWeight, ThresholdStep } from '../types/healthSuite';
 
 // Seeded pseudorandom number generator (LCG / Mulberry32)
 export function createSeededRandom(seed: number) {

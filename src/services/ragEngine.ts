@@ -1,4 +1,4 @@
-import { WhoDocument, TextChunk, RetrievalResult, RagBenchmarkQuestion } from '../types/assignment';
+import { WhoDocument, TextChunk, RetrievalResult, RagBenchmarkQuestion } from '../types/healthSuite';
 
 export const WHO_PUBLIC_DOCUMENTS: WhoDocument[] = [
   {

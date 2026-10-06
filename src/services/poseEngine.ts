@@ -1,4 +1,4 @@
-import { ExercisePoseData, VideoTestBench } from '../types/assignment';
+import { ExercisePoseData, VideoTestBench } from '../types/healthSuite';
 
 // Level 2: Scratch 3-point joint angle function using Vector Mathematics
 // Given point A (hip), point B (knee - vertex), point C (ankle)

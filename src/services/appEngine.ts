@@ -1,4 +1,4 @@
-import { SqlPredictionRecord, SqlStatsResult, PytestResult } from '../types/assignment';
+import { SqlPredictionRecord, SqlStatsResult, PytestResult } from '../types/healthSuite';
 
 // In-Memory Relational Database implementing Hand-Written SQL Execution
 class InMemoryHealthDatabase {

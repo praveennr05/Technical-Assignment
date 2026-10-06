@@ -2,9 +2,9 @@ import React, { useState, useMemo } from 'react';
 import {
   RAW_DOCUMENT_LINES,
   SECTIONS_OVERVIEW,
-  ASSIGNMENT_METADATA,
+  SPEC_METADATA,
   DocumentLine
-} from './data/assignmentDocument';
+} from './data/specificationDocument';
 import { generateReadme, generatePersonalIntelligence } from './data/templates';
 import {
   generatePythonLevel1A,
@@ -16,6 +16,8 @@ import { QuestionBPanel } from './components/QuestionBPanel';
 import { QuestionCPanel } from './components/QuestionCPanel';
 import { QuestionDPanel } from './components/QuestionDPanel';
 import { GitChecklist } from './components/GitChecklist';
+import { EvaluationLevelsGuide } from './components/EvaluationLevelsGuide';
+import { NotebookViewer } from './components/NotebookViewer';
 import {
   FileText,
   BookOpen,
@@ -37,6 +39,7 @@ import {
   Terminal,
   ChevronRight,
   ListOrdered,
+  FileCode2,
   Download,
   FolderGit2
 } from 'lucide-react';
@@ -99,142 +102,132 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
-      {/* Top Navbar */}
-      <header className="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      {/* Top Bar Contract: Zone 1 (Wordmark) — Zone 2 (Nav Links) — Zone 3 (Primary Action) */}
+      <header className="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+          {/* Zone 1: Single clean text wordmark */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-emerald-400 p-0.5 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-              <div className="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center">
-                <Activity className="w-5 h-5 text-emerald-400" />
-              </div>
+            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
+              <Activity className="w-4 h-4" />
             </div>
             <div>
-              <div className="flex items-center space-x-2">
-                <h1 className="text-base sm:text-lg font-bold text-white tracking-tight">
-                  AI for Personal Health and Wellness
-                </h1>
-                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                  ALL 4 BLOCKS IMPLEMENTED
-                </span>
+              <span className="text-base font-bold text-white tracking-tight block">
+                HealthAI Suite
+              </span>
+              <div className="flex items-center space-x-2 text-[11px] text-slate-400">
+                <span>Personal Health &amp; Wellness</span>
+                <span>·</span>
+                <span className="font-mono text-emerald-400">Seed S = {computedSeed}</span>
               </div>
-              <p className="text-xs text-slate-400">
-                Candidate: <strong className="text-slate-200">{candidateName}</strong> ({usn}) • Deterministic Seed: <strong className="text-emerald-400 font-mono">S = {computedSeed}</strong>
-              </p>
             </div>
           </div>
 
+          {/* Zone 2: Navigation Links */}
+          <nav className="hidden lg:flex items-center space-x-1 text-xs font-medium">
+            <button
+              onClick={() => setActiveTab('overview')}
+              className={`px-3 py-1.5 rounded-lg transition-colors ${
+                activeTab === 'overview' ? 'bg-slate-900 text-white font-semibold' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              Overview
+            </button>
+            <button
+              onClick={() => setActiveTab('question_a')}
+              className={`px-3 py-1.5 rounded-lg transition-colors ${
+                activeTab === 'question_a' ? 'bg-slate-900 text-blue-400 font-semibold' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              Block A (Risk)
+            </button>
+            <button
+              onClick={() => setActiveTab('question_b')}
+              className={`px-3 py-1.5 rounded-lg transition-colors ${
+                activeTab === 'question_b' ? 'bg-slate-900 text-emerald-400 font-semibold' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              Block B (App)
+            </button>
+            <button
+              onClick={() => setActiveTab('question_c')}
+              className={`px-3 py-1.5 rounded-lg transition-colors ${
+                activeTab === 'question_c' ? 'bg-slate-900 text-purple-400 font-semibold' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              Block C (RAG)
+            </button>
+            <button
+              onClick={() => setActiveTab('question_d')}
+              className={`px-3 py-1.5 rounded-lg transition-colors ${
+                activeTab === 'question_d' ? 'bg-slate-900 text-amber-400 font-semibold' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              Block D (Vision)
+            </button>
+            <button
+              onClick={() => setActiveTab('workbench')}
+              className={`px-3 py-1.5 rounded-lg transition-colors ${
+                activeTab === 'workbench' ? 'bg-slate-900 text-indigo-400 font-semibold' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              Workbench
+            </button>
+            <button
+              onClick={() => setActiveTab('reader')}
+              className={`px-3 py-1.5 rounded-lg transition-colors ${
+                activeTab === 'reader' ? 'bg-slate-900 text-white font-semibold' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              Document Lines
+            </button>
+            <button
+              onClick={() => setActiveTab('submission')}
+              className={`px-3 py-1.5 rounded-lg transition-colors ${
+                activeTab === 'submission' ? 'bg-slate-900 text-rose-400 font-semibold' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              Submission
+            </button>
+          </nav>
+
+          {/* Zone 3: Primary Action */}
           <div className="flex items-center space-x-3 text-xs">
-            <div className="hidden sm:flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700">
-              <Clock className="w-3.5 h-3.5 text-amber-400" />
-              <span className="text-slate-300">Deadline: 6 Oct 2026, 5:00 PM IST</span>
+            <div className="hidden sm:block text-right">
+              <span className="text-[10px] text-slate-500 block uppercase font-mono">Cutoff Time</span>
+              <span className="font-mono text-amber-400 font-medium">6 Oct, 5:00 PM IST</span>
             </div>
             <button
               onClick={() => setActiveTab('workbench')}
-              className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition-colors flex items-center space-x-1.5"
+              className="px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition-colors flex items-center space-x-1.5 text-xs whitespace-nowrap shadow-sm"
             >
               <FolderGit2 className="w-3.5 h-3.5" />
-              <span>Project Deliverables</span>
+              <span>Deliverables</span>
             </button>
           </div>
         </div>
 
-        {/* Navigation Tabs */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-1 border-t border-slate-800/60 overflow-x-auto scrollbar-none text-xs sm:text-sm">
-          <button
-            onClick={() => setActiveTab('overview')}
-            className={`py-2.5 px-3.5 font-medium border-b-2 whitespace-nowrap transition-colors flex items-center space-x-1.5 ${
-              activeTab === 'overview'
-                ? 'border-indigo-500 text-indigo-400 bg-indigo-500/10'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <Layers className="w-4 h-4" />
-            <span>Overview &amp; Scenario</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('question_a')}
-            className={`py-2.5 px-3.5 font-medium border-b-2 whitespace-nowrap transition-colors flex items-center space-x-1.5 ${
-              activeTab === 'question_a'
-                ? 'border-blue-500 text-blue-400 bg-blue-500/10'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <span className="w-4 h-4 rounded bg-blue-500/20 text-blue-400 text-[10px] font-bold flex items-center justify-center">A</span>
-            <span>Block A: Risk Predictor</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('question_b')}
-            className={`py-2.5 px-3.5 font-medium border-b-2 whitespace-nowrap transition-colors flex items-center space-x-1.5 ${
-              activeTab === 'question_b'
-                ? 'border-emerald-500 text-emerald-400 bg-emerald-500/10'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <span className="w-4 h-4 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold flex items-center justify-center">B</span>
-            <span>Block B: Usable App</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('question_c')}
-            className={`py-2.5 px-3.5 font-medium border-b-2 whitespace-nowrap transition-colors flex items-center space-x-1.5 ${
-              activeTab === 'question_c'
-                ? 'border-purple-500 text-purple-400 bg-purple-500/10'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <span className="w-4 h-4 rounded bg-purple-500/20 text-purple-400 text-[10px] font-bold flex items-center justify-center">C</span>
-            <span>Block C: Trusted Assistant</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('question_d')}
-            className={`py-2.5 px-3.5 font-medium border-b-2 whitespace-nowrap transition-colors flex items-center space-x-1.5 ${
-              activeTab === 'question_d'
-                ? 'border-amber-500 text-amber-400 bg-amber-500/10'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <span className="w-4 h-4 rounded bg-amber-500/20 text-amber-400 text-[10px] font-bold flex items-center justify-center">D</span>
-            <span>Block D: Exercise Tracker</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('workbench')}
-            className={`py-2.5 px-3.5 font-medium border-b-2 whitespace-nowrap transition-colors flex items-center space-x-1.5 ${
-              activeTab === 'workbench'
-                ? 'border-indigo-500 text-indigo-400 bg-indigo-500/10'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <Terminal className="w-4 h-4" />
-            <span>Code &amp; Deliverables Generator</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('reader')}
-            className={`py-2.5 px-3.5 font-medium border-b-2 whitespace-nowrap transition-colors flex items-center space-x-1.5 ${
-              activeTab === 'reader'
-                ? 'border-indigo-500 text-indigo-400 bg-indigo-500/10'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <ListOrdered className="w-4 h-4" />
-            <span>Line-by-Line Document</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('submission')}
-            className={`py-2.5 px-3.5 font-medium border-b-2 whitespace-nowrap transition-colors flex items-center space-x-1.5 ${
-              activeTab === 'submission'
-                ? 'border-rose-500 text-rose-400 bg-rose-500/10'
-                : 'border-transparent text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <ShieldAlert className="w-4 h-4" />
-            <span>Submission &amp; Audit</span>
-          </button>
+        {/* Mobile/Tablet Secondary Nav Bar */}
+        <div className="lg:hidden max-w-7xl mx-auto px-4 flex space-x-1 border-t border-slate-800/60 overflow-x-auto scrollbar-none py-2 text-xs">
+          {[
+            { id: 'overview', label: 'Overview' },
+            { id: 'question_a', label: 'Block A (Risk)' },
+            { id: 'question_b', label: 'Block B (App)' },
+            { id: 'question_c', label: 'Block C (RAG)' },
+            { id: 'question_d', label: 'Block D (Vision)' },
+            { id: 'workbench', label: 'Workbench' },
+            { id: 'reader', label: 'Document' },
+            { id: 'submission', label: 'Submission' }
+          ].map(tab => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id as any)}
+              className={`px-3 py-1 rounded-md whitespace-nowrap font-medium transition-colors ${
+                activeTab === tab.id ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
       </header>
 
@@ -244,151 +237,158 @@ export default function App() {
         {/* OVERVIEW TAB */}
         {activeTab === 'overview' && (
           <div className="space-y-8 animate-fadeIn">
-            {/* Mission Hero */}
-            <div className="bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+            {/* Hero Stage */}
+            <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 relative overflow-hidden">
               <div className="relative z-10 max-w-3xl">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 mb-3">
-                  Health-Tech Team Startup Scenario • Production Implementation
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">
-                  Building Practical AI Tools for Personal Health
+                <div className="flex items-center space-x-2 text-xs text-slate-400 mb-2">
+                  <span className="text-emerald-400 font-medium">Production Implementation</span>
+                  <span>·</span>
+                  <span>Health-Tech Team Startup Scenario</span>
+                  <span>·</span>
+                  <span>4 Functional Blocks</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-2.5">
+                  AI for Personal Health and Wellness
                 </h2>
-                <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans">
                   "A small health-tech team needs four building blocks: a risk predictor, an app that uses it, a trusted question-answering assistant, and an exercise tracker."
-                  While the exam allows answering any 2, <strong className="text-indigo-400">all four full modules</strong> have been constructed and executed below with their complete 3 levels!
+                  All four building blocks are fully implemented across Levels 1, 2, and 3 with verifiable calculations.
                 </p>
 
                 {/* Candidate Seed Quick Config */}
-                <div className="mt-6 pt-6 border-t border-slate-800 flex flex-wrap items-center gap-4 text-xs">
+                <div className="mt-6 pt-5 border-t border-slate-800/80 flex flex-wrap items-center gap-4 text-xs">
                   <div className="flex items-center space-x-2">
-                    <span className="text-slate-400 font-semibold">Your USN:</span>
+                    <span className="text-slate-400 font-medium">Your USN:</span>
                     <input
                       type="text"
                       value={usn}
                       onChange={(e) => setUsn(e.target.value)}
-                      className="bg-slate-950 border border-slate-700 rounded px-2.5 py-1 text-slate-200 font-mono text-xs w-32 focus:outline-none focus:border-indigo-500"
+                      className="bg-slate-950 border border-slate-700/80 rounded-lg px-2.5 py-1 text-slate-200 font-mono text-xs w-32 focus:outline-none focus:border-indigo-500"
                     />
                   </div>
 
-                  <div className="bg-emerald-950/40 border border-emerald-800/60 px-3 py-1 rounded-lg text-emerald-300 font-mono">
-                    Deterministic Seed: <strong>S = {computedSeed}</strong>
+                  <div className="bg-slate-950 border border-slate-800 px-3 py-1 rounded-lg text-emerald-400 font-mono text-xs">
+                    Deterministic Seed: <strong className="text-white">S = {computedSeed}</strong>
                   </div>
 
                   <span className="text-slate-500 text-[11px]">
-                    (Controls train/test split, PRNG, and model weights across all modules)
+                    (Drives train/test split, PRNG, and model weights across all modules)
                   </span>
                 </div>
               </div>
             </div>
 
+            {/* The 3-Tier Evaluation Matrix Component (Page 2 Mandate) */}
+            <EvaluationLevelsGuide candidateSeed={computedSeed} />
+
             {/* 4 Interactive Building Blocks Cards */}
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-white flex items-center space-x-2">
-                  <Cpu className="w-5 h-5 text-indigo-400" />
+                <h3 className="text-base font-bold text-white flex items-center space-x-2">
+                  <Cpu className="w-4 h-4 text-indigo-400" />
                   <span>The Four Technical Building Blocks</span>
                 </h3>
-                <span className="text-xs text-slate-400">Click any block to enter its live lab</span>
+                <span className="text-xs text-slate-400">Select any block to test live execution</span>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Block A */}
                 <div
                   onClick={() => setActiveTab('question_a')}
-                  className="bg-slate-900 border border-slate-800 hover:border-blue-500/60 rounded-xl p-5 cursor-pointer transition-all hover:shadow-lg hover:shadow-blue-500/5 group"
+                  className="bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-xl p-5 cursor-pointer transition-all group"
                 >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="w-8 h-8 rounded-lg bg-blue-600/20 text-blue-400 font-black text-sm flex items-center justify-center border border-blue-500/30">
-                      A
-                    </span>
-                    <span className="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">
-                      Question A • P.2
-                    </span>
+                  <div className="flex items-center justify-between mb-3 text-xs">
+                    <div className="flex items-center space-x-2">
+                      <span className="w-6 h-6 rounded bg-blue-500/10 text-blue-400 font-bold text-xs flex items-center justify-center border border-blue-500/20">
+                        A
+                      </span>
+                      <span className="font-semibold text-white group-hover:text-blue-300 transition-colors">
+                        Predict a Health Risk
+                      </span>
+                    </div>
+                    <span className="text-slate-500 font-mono text-[11px]">UCI Heart Data</span>
                   </div>
-                  <h4 className="font-bold text-base text-white group-hover:text-blue-300 transition-colors">
-                    Predict a Health Risk
-                  </h4>
-                  <p className="text-xs text-slate-400 mt-1 mb-3">
-                    UCI Heart dataset cleaning, Logistic Regression &amp; Random Forest with seed S, pure NumPy scratch sigmoid/BCE/gradient descent, and Recall ≥ 0.90 threshold sweep.
+                  <p className="text-xs text-slate-400 mb-3 leading-relaxed">
+                    Logistic Regression &amp; Random Forest with seed S, pure NumPy scratch sigmoid/BCE/gradient descent, and Recall ≥ 0.90 threshold sweep.
                   </p>
                   <div className="flex items-center text-xs text-blue-400 font-semibold space-x-1">
-                    <span>Open Question A Lab</span>
-                    <ChevronRight className="w-4 h-4" />
+                    <span>Open Block A Console</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
 
                 {/* Block B */}
                 <div
                   onClick={() => setActiveTab('question_b')}
-                  className="bg-slate-900 border border-slate-800 hover:border-emerald-500/60 rounded-xl p-5 cursor-pointer transition-all hover:shadow-lg hover:shadow-emerald-500/5 group"
+                  className="bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-xl p-5 cursor-pointer transition-all group"
                 >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="w-8 h-8 rounded-lg bg-emerald-600/20 text-emerald-400 font-black text-sm flex items-center justify-center border border-emerald-500/30">
-                      B
-                    </span>
-                    <span className="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">
-                      Question B • P.3
-                    </span>
+                  <div className="flex items-center justify-between mb-3 text-xs">
+                    <div className="flex items-center space-x-2">
+                      <span className="w-6 h-6 rounded bg-emerald-500/10 text-emerald-400 font-bold text-xs flex items-center justify-center border border-emerald-500/20">
+                        B
+                      </span>
+                      <span className="font-semibold text-white group-hover:text-emerald-300 transition-colors">
+                        Turn a Model into a Usable App
+                      </span>
+                    </div>
+                    <span className="text-slate-500 font-mono text-[11px]">FastAPI &amp; SQLite</span>
                   </div>
-                  <h4 className="font-bold text-base text-white group-hover:text-emerald-300 transition-colors">
-                    Turn a Model into a Usable App
-                  </h4>
-                  <p className="text-xs text-slate-400 mt-1 mb-3">
+                  <p className="text-xs text-slate-400 mb-3 leading-relaxed">
                     FastAPI /predict endpoint, relational persistence, hand-written SQL /stats (no ORM!), 3 automated pytests, and chaos engineering fault injections.
                   </p>
                   <div className="flex items-center text-xs text-emerald-400 font-semibold space-x-1">
-                    <span>Open Question B Lab</span>
-                    <ChevronRight className="w-4 h-4" />
+                    <span>Open Block B Console</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
 
                 {/* Block C */}
                 <div
                   onClick={() => setActiveTab('question_c')}
-                  className="bg-slate-900 border border-slate-800 hover:border-purple-500/60 rounded-xl p-5 cursor-pointer transition-all hover:shadow-lg hover:shadow-purple-500/5 group"
+                  className="bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-xl p-5 cursor-pointer transition-all group"
                 >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="w-8 h-8 rounded-lg bg-purple-600/20 text-purple-400 font-black text-sm flex items-center justify-center border border-purple-500/30">
-                      C
-                    </span>
-                    <span className="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">
-                      Question C • P.3
-                    </span>
+                  <div className="flex items-center justify-between mb-3 text-xs">
+                    <div className="flex items-center space-x-2">
+                      <span className="w-6 h-6 rounded bg-purple-500/10 text-purple-400 font-bold text-xs flex items-center justify-center border border-purple-500/20">
+                        C
+                      </span>
+                      <span className="font-semibold text-white group-hover:text-purple-300 transition-colors">
+                        Trusted Health Assistant (RAG)
+                      </span>
+                    </div>
+                    <span className="text-slate-500 font-mono text-[11px]">5 WHO Docs</span>
                   </div>
-                  <h4 className="font-bold text-base text-white group-hover:text-purple-300 transition-colors">
-                    Trusted Health Assistant (RAG)
-                  </h4>
-                  <p className="text-xs text-slate-400 mt-1 mb-3">
-                    5 WHO public health factsheets, pure NumPy TF-IDF &amp; cosine similarity (no vector DB!), 10 benchmark test questions, and retrieval error attribution.
+                  <p className="text-xs text-slate-400 mb-3 leading-relaxed">
+                    WHO public health factsheets, pure NumPy TF-IDF &amp; cosine similarity (no vector DB!), 10 benchmark test questions, and retrieval error attribution.
                   </p>
                   <div className="flex items-center text-xs text-purple-400 font-semibold space-x-1">
-                    <span>Open Question C Lab</span>
-                    <ChevronRight className="w-4 h-4" />
+                    <span>Open Block C Console</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
 
                 {/* Block D */}
                 <div
                   onClick={() => setActiveTab('question_d')}
-                  className="bg-slate-900 border border-slate-800 hover:border-amber-500/60 rounded-xl p-5 cursor-pointer transition-all hover:shadow-lg hover:shadow-amber-500/5 group"
+                  className="bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-xl p-5 cursor-pointer transition-all group"
                 >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="w-8 h-8 rounded-lg bg-amber-600/20 text-amber-400 font-black text-sm flex items-center justify-center border border-amber-500/30">
-                      D
-                    </span>
-                    <span className="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">
-                      Question D • P.3
-                    </span>
+                  <div className="flex items-center justify-between mb-3 text-xs">
+                    <div className="flex items-center space-x-2">
+                      <span className="w-6 h-6 rounded bg-amber-500/10 text-amber-400 font-bold text-xs flex items-center justify-center border border-amber-500/20">
+                        D
+                      </span>
+                      <span className="font-semibold text-white group-hover:text-amber-300 transition-colors">
+                        Track an Exercise with a Camera
+                      </span>
+                    </div>
+                    <span className="text-slate-500 font-mono text-[11px]">Kinematics &amp; Pose</span>
                   </div>
-                  <h4 className="font-bold text-base text-white group-hover:text-amber-300 transition-colors">
-                    Track an Exercise with a Camera
-                  </h4>
-                  <p className="text-xs text-slate-400 mt-1 mb-3">
+                  <p className="text-xs text-slate-400 mb-3 leading-relaxed">
                     Vector 3-point joint angle math, moving average smoothing, dual-threshold hysteresis rep state machine, and 3 candidate video evaluations.
                   </p>
                   <div className="flex items-center text-xs text-amber-400 font-semibold space-x-1">
-                    <span>Open Question D Lab</span>
-                    <ChevronRight className="w-4 h-4" />
+                    <span>Open Block D Console</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
               </div>
@@ -523,7 +523,26 @@ export default function App() {
                   <span>Downloadable / Ready-to-Commit Python Scripts</span>
                 </h4>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+                  {/* Notebook Card */}
+                  <div className="bg-slate-950 p-3.5 rounded-lg border border-amber-500/30 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center space-x-1.5 mb-1">
+                        <FileCode2 className="w-4 h-4 text-amber-400" />
+                        <span className="font-bold text-white block">question_a_models.ipynb</span>
+                      </div>
+                      <p className="text-[11px] text-slate-400">
+                        Full Jupyter notebook for Logistic Regression &amp; Random Forest (Levels 1, 2, 3 with seed S={computedSeed}).
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => setActiveTab('question_a')}
+                      className="mt-3 py-1.5 rounded bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 flex items-center justify-center space-x-1 text-xs font-semibold"
+                    >
+                      <span>Inspect &amp; Download .ipynb</span>
+                    </button>
+                  </div>
+
                   <div className="bg-slate-950 p-3.5 rounded-lg border border-slate-800 flex flex-col justify-between">
                     <div>
                       <span className="font-bold text-white block">question_a/level2_scratch.py</span>
@@ -571,6 +590,11 @@ export default function App() {
                       <span>{copiedType === 'gitcmd' ? 'Copied Command!' : 'Copy Command'}</span>
                     </button>
                   </div>
+                </div>
+
+                {/* Embedded Notebook Viewer Section */}
+                <div className="mt-8 pt-6 border-t border-slate-800">
+                  <NotebookViewer candidateSeed={computedSeed} />
                 </div>
               </div>
             </div>
@@ -714,7 +738,7 @@ export default function App() {
                   <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 sticky top-24 space-y-4 text-xs">
                     <div className="flex items-center justify-between pb-3 border-b border-slate-800">
                       <span className="font-mono text-indigo-400">Line #{selectedLine.lineNum}</span>
-                      <span className="px-2 py-0.5 rounded bg-slate-800 font-mono text-slate-300">Page {selectedLine.page} of 5</span>
+                      <span className="font-mono text-slate-400">Page {selectedLine.page} of 5</span>
                     </div>
 
                     <div>
@@ -753,7 +777,7 @@ export default function App() {
               <div className="space-y-4 max-w-2xl bg-slate-950 p-5 rounded-xl border border-slate-800 font-sans text-xs">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800">
                   <span className="text-slate-400">Recipient Email:</span>
-                  <code className="text-emerald-400 font-mono font-bold">{ASSIGNMENT_METADATA.recipientEmail}</code>
+                  <code className="text-emerald-400 font-mono font-bold">{SPEC_METADATA.recipientEmail}</code>
                 </div>
 
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800">
@@ -772,7 +796,7 @@ export default function App() {
 
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800">
                   <span className="text-slate-400">Google Drive Permission:</span>
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">
+                  <span className="text-emerald-400 font-semibold font-mono">
                     "Anyone with the link can view"
                   </span>
                 </div>
